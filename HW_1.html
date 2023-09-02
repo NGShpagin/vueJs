@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .element:hover {
+            cursor: pointer;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+<div id="hw_1">
+    <button @click="revert"> {{ revertBtn }}</button>
+    <hr>
+    <ul class="my_list">
+        <li class="element" v-for="element in elements" :key="element.value" @click="delEl(element)">
+            {{ element.value }}
+        </li>
+    </ul>
+    <button @click="addEl">Добавить</button>
+</div>
+
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+    // Задачи по vue
+    // 1. Создать кнопку "Перевернуть". При клике на кнопку текст кнопки, должен перевернуться и отобразиться в обратном порядке.
+    // 2. Есть список элементов. Пользователь может добавлять новые элементы списка с текстом “Новый элемент списка” нажав на кнопку "Добавить".
+    // 3. * При клике на элемент списка он должен быть удален. (по желанию)
+
+    const homework = {
+        data() {
+            return {
+                revertBtn: 'Перевернуть',
+                message: 'Новый элемент списка',
+                elements: [
+                    {value: 'Element 1'},
+                    {value: 'Element 2'}
+                ]
+            }
+        },
+        methods: {
+            revert() {
+                this.revertBtn = this.revertBtn.split("").reverse().join("")
+            },
+            addEl() {
+                this.elements.push({value: this.message})
+            },
+            delEl(el) {
+                this.elements = this.elements.filter((element) => element !== el)
+            }
+        }
+    }
+
+    Vue.createApp(homework).mount('#hw_1')
+</script>
+</body>
+</html>

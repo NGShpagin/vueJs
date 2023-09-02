@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .content {
+            animation: vision 1s ease-in-out;
+        }
+
+        @keyframes vision {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="Hello-vue">
+    {{ message }}
+</div>
+
+<hr>
+
+<div id="task-2">Task 2<br>
+    <p>Товаров в корзине: {{ count }}</p>
+    <button v-on:click="add">{{ cartBtn }}</button>
+    <button @click="del">Удалить</button>
+</div>
+
+<hr>
+
+<div id="task-3">Task 3<br>
+    <button @click="canBuy=!canBuy">Мне исполнилось 14 лет”</button>
+    <p v-show="canBuy">Можете заказать товар</p>
+    <button @click="cantBuy=!cantBuy">Мне еще нет 14 лет</button>
+    <!--    <p>{{ message }}</p>-->
+    <p v-if="cantBuy">Доступ закрыт</p>
+</div>
+
+<hr>
+
+<div id="task-4">Task 4<br>
+    <button @click="show=!show">Показать еще</button>
+    <p v-show="show" class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore neque officiis
+        quos unde vero voluptate!</p>
+</div>
+
+<hr>
+
+<div id="task-5">Task 5<br>
+    <button @click="random">Генерировать</button>
+    <p>{{ randomNumber }}</p>
+    <p v-if="randomNumber < 5">Число меньше 5</p>
+    <p v-else-if="randomNumber >= 5 && randomNumber < 10">Число от 5 до 9</p>
+    <p v-else>Число ранов 10</p>
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+    const HelloWorldApp = {
+        data() {
+            return {
+                message: 'Hello Vue!',
+            }
+        }
+    }
+
+    Vue.createApp(HelloWorldApp).mount('#Hello-vue')
+
+    // Задание 2
+    // 1.Создать параграф, внутри которого будет отображаться текст “Товаров в корзине 0”
+    // 2.Создать кнопку “Купить”, при клике на которую, значение внутри параграфа будет увеличиваться на 1, при повторном нажатии на эту кнопку, счетчик не становится больше, добавить 4 таких кнопки
+    // 3.При нажатии на кнопку купить, необходимо чтобы текст внутри кнопки поменялся на “Товар в Корзине”
+
+    const Task2 = {
+        data() {
+            return {
+                count: 0,
+                cartBtn: 'Купить'
+            }
+        },
+        methods: {
+            add() {
+                if (this.count < 1) {
+                    this.count++;
+                    this.cartBtn = 'Товар в корзине'
+                }
+            },
+            del() {
+                if (this.count !== 0) {
+                    this.count--;
+                    this.cartBtn = 'Купить'
+                }
+            },
+        }
+    }
+
+    Vue.createApp(Task2).mount('#task-2')
+
+
+    // Задание 3
+    // 1.Создать две кнопки “Мне исполнилось 14 лет” и “Мне еще нет 14 лет”
+    // 2.Если пользователь нажимает на первую кнопку, то должен отобразиться текст. “Можете заказать товар”
+    // 3.Если пользователь нажимает на вторую кнопку, отображается текст “Доступ закрыт”
+
+    const Task3 = {
+        data() {
+            return {
+                message: '',
+                canBuy: false,
+                cantBuy: false
+            }
+        },
+        methods: {
+            btn1Press() {
+                this.message = 'Можете заказать товар'
+            },
+            btn2Press() {
+                this.message = 'Доступ закрыт'
+            }
+        }
+    }
+
+    Vue.createApp(Task3).mount('#task-3')
+
+    // Задание 4
+    // 1.Создать кнопку “Показать еще” при клике на которую появляется контент под кнопкой, при повторном клике, контент необходимо скрыть
+    // 2.Добавить анимацию появления текстового блока
+
+    const Task4 = {
+        data() {
+            return {
+                show: false
+            }
+        }
+    }
+
+    Vue.createApp(Task4).mount('#task-4')
+
+    // Задание 5
+    // 1.Создайте кнопку "Генерировать случайное число". При клике на кнопку должно отображаться случайное число в заданном диапазоне (например, от 1 до 10).
+    // 2.При клике на кнопку, если полученное значение меньше 5, необходимо вывести на страницу, “Число меньше 5”
+    // 3.Если число от 5 до 9, необходимо вывести “Число от 5 до 9”
+    // 4.Если число равно 10, необходимо вывести “Число ранов 10”
+
+    const Task5 = {
+        data() {
+            return {
+                randomNumber: 0,
+
+            }
+        },
+        methods: {
+            random() {
+                this.randomNumber = Math.floor(Math.random() * 10 + 1)
+            }
+        }
+    }
+
+    Vue.createApp(Task5).mount('#task-5')
+
+
+</script>
+</body>
+</html>
