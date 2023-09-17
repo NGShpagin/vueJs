@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lection 3</title>
+</head>
+<body>
+<div id="app">
+    <new-component title="Hello new title" :counter="counter"></new-component>
+    <new-component :title="article" v-for="article in articles" :key="article.id"></new-component>
+    <button @click="currentTab = nameButton" v-for="nameButton in nameButtons" :key="nameButton.id">
+        {{ nameButton }}
+    </button>
+    <component :is="changeTabs"></component>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="comp.js"></script>
+<script>
+
+    new Vue({
+        el: '#app',
+        data: {
+            articles: ['info article 1', 'info article 2', 'info article 3'],
+            counter: 0,
+            nameButtons: ['one', 'two', 'three'],
+            currentTab: 'one'
+        },
+        computed: {
+            changeTabs() {
+                return `change-${this.currentTab}`
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

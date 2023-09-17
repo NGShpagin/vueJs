@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lection_2</title>
+    <style>
+        .block {
+            width: 350px;
+            height: 200px;
+        }
+
+        .btn {
+            width: 35px;
+            height: 35px;
+        }
+
+        .like {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+<div id="app">
+    <article v-for="article in data" :key="article.id" class="article">
+        <h2 class="article__title">{{ article.title }}</h2>
+        <p class="article__text">{{ article.text }}</p>
+        <button class="btn" @click="likeToggle = !likeToggle" :class="{like: likeToggle}">like</button>
+    </article>
+    <hr>
+    <h2>list</h2>
+    <ul>
+        <li v-for="item in listItems" :key="item.id">{{ item }}</li>
+    </ul>
+    <input type="text" v-model="newList" @keyup.enter="addItem">
+    <hr>
+    <input type="text" @keyup.enter="send">
+    <button @click="send">Отправить</button>
+    <hr>
+    <h2>link elem</h2>
+    <a v-bind:href="linkHref">my new link</a> // лучше использовать ":href="linkHref""
+    <img :src="imgPhoto" alt="photo">
+
+    <h2>Конструктор</h2>
+    <input type="text" v-model="blockWidth">
+    <input type="text" v-model="blockColor">
+    <div class="block" :style="change">
+        <p>Lorem ipsum dolor sit amet.</p>
+    </div>
+    <h2>{{ modelData }}</h2>
+    <input type="text" v-model.lazy="modelData">
+    <button @click="headingText" class="heading__button">click heading</button>
+    <h2>Калькулятор</h2>
+    <input type="number" v-model.number="firstNumber">
+    <input type="number" v-model.number="secondNumber">
+    =
+    {{ result }}
+    <div>
+        <button @click="sum">+</button>
+        <button @click="minus">-</button>
+        <button @click="mult">*</button>
+        <button @click="diff">/</button>
+    </div>
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+    const task_1 = {
+        data() {
+            return {
+                likeToggle: false,
+                data: [
+                    {
+                        title: 'title text',
+                        text: 'description text info element',
+                    },
+                    {
+                        title: 'new title text',
+                        text: 'new description text info element',
+                    }
+                ],
+                listItems: [1, 2, 4],
+                newList: '',
+                linkHref: 'product.html',
+                imgPhoto: 'photo.jpg',
+                // styleBlock: {
+                //     backgroundColor: 'green',
+                //     color: 'red'
+                // },
+                modelData: '',
+                firstNumber: 0,
+                secondNumber: 0,
+                result: 0,
+                blockWidth: 100,
+                blockColor: '#ccc',
+            }
+        },
+        methods: {
+            headingText() {
+                if (this.modelData === '') {
+                    this.modelData = 'Заголовок для блока'
+                }
+            },
+            send() {
+                console.log('Отправили данные внутри input')
+            },
+            sum() {
+                this.result = this.firstNumber + this.secondNumber;
+            },
+            minus() {
+                this.result = this.firstNumber - this.secondNumber;
+            },
+            mult() {
+                this.result = this.firstNumber * this.secondNumber;
+            },
+            diff() {
+                this.result = this.firstNumber / this.secondNumber;
+            },
+            // changeBlock() {
+            //     return {
+            //         width: this.blockWidth,
+            //         height: this.blockWidth,
+            //         backgroundColor: this.blockColor,
+            //     }
+            // },
+            addItem() {
+                this.listItems.push(this.newList)
+            }
+        },
+        computed: {
+            change() {
+                return {
+                    width: `${this.blockWidth}px`,
+                    height: `${this.blockWidth}px`,
+                    backgroundColor: this.blockColor,
+                }
+            }
+        }
+    }
+
+    Vue.createApp(task_1).mount('#app')
+</script>
+</body>
+</html>

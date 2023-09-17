@@ -8,8 +8,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Project.main_page</title>
     <link rel="stylesheet" href="style.css">
-    <title>HW1</title>
 </head>
 <body>
 
@@ -19,16 +19,16 @@
             <path d="M0 34.0003H13.4588V24.499C13.4588 22.4853 15.0898 20.8543 17.1035 20.8543C19.1172 20.8543 20.7482 22.4853 20.7482 24.499V34.0003H33.9975V0C15.2211 0 0 15.2211 0 34.0003Z"
                   fill="#CDA274"/>
         </svg>
-        <p class="logo__text">Interno</p>
+        <a class="logo__text" href="index.html">Interno</a>
     </nav>
     <nav class="header__right">
-        <a class="header__menubar" href="#">Home</a>
+        <a class="header__menubar" href="index.html">Home</a>
         <a class="header__menubar" href="#">Project</a>
-        <a class="header__menubar" href="#">Blog</a>
+        <a class="header__menubar" href="blog.html">Blog</a>
     </nav>
 </header>
 
-<div class="main-page-cover center">
+<section class="main-page-cover center">
     <main class="main-page">
         <div class="main-page__content">
             <div class="main-page__description">
@@ -45,9 +45,9 @@
             </button>
         </div>
     </main>
-</div>
+</section>
 
-<div class="projects center">
+<section class="projects center">
     <div class="projects__name">
         <h2 class="projects__heading">Follow Our Projects</h2>
         <p class="projects__text">It is a long established fact that a reader will be distracted by the of readable
@@ -120,9 +120,9 @@
 
         </div>
     </div>
-</div>
+</section>
 
-<div class="counter-cover center">
+<section class="counter-cover center">
     <div class="counter">
         <div class="counter-box">
             <div class="counter-item">
@@ -152,16 +152,16 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 
-<div class="blog center">
-    <div class="projects__name">
-        <h2 class="projects__heading">Articles & News</h2>
-        <p class="projects__text">It is a long established fact that a reader will be distracted by the of readable
+<section class="blog center">
+    <div class="blog__name">
+        <a class="blog__heading" href="blog.html">Articles & News</a>
+        <p class="blog__text">It is a long established fact that a reader will be distracted by the of readable
             content of a page when lookings at its layouts the points of using.</p>
     </div>
     <div class="articles-box">
-        <div class="article">
+        <article class="article">
             <div class="article__image-box">
                 <img class="article__image" src="images/article-1.jpg" alt="article-1">
                 <div class="article__tag">
@@ -180,8 +180,8 @@
                     </svg>
                 </div>
             </div>
-        </div>
-        <div class="article">
+        </article>
+        <article class="article">
             <div class="article__image-box">
                 <img class="article__image" src="images/article-2.jpg" alt="article-2">
                 <div class="article__tag">
@@ -200,8 +200,8 @@
                     </svg>
                 </div>
             </div>
-        </div>
-        <div class="article">
+        </article>
+        <article class="article">
             <div class="article__image-box">
                 <img class="article__image" src="images/article-3.jpg" alt="article-3">
                 <div class="article__tag">
@@ -220,9 +220,9 @@
                     </svg>
                 </div>
             </div>
-        </div>
+        </article>
     </div>
-</div>
+</section>
 
 <footer class="footer center">
     <div class="footer__box">
@@ -249,9 +249,9 @@
         <div class="footer__item footer__links">
             <h3 class="footer__heading">Pages</h3>
             <nav class="footer__site-links">
-                <a class="footer__text footer__site-link" href="#">Home</a>
+                <a class="footer__text footer__site-link" href="index.html">Home</a>
                 <a class="footer__text footer__site-link" href="#">Projects</a>
-                <a class="footer__text footer__site-link" href="#">Blog</a>
+                <a class="footer__text footer__site-link" href="blog.html">Blog</a>
             </nav>
         </div>
 
@@ -265,5 +265,7 @@
 
 </footer>
 
+<script src="https://unpkg.com/vue@next"></script>
+<script src="blogs_details.js"></script>
 </body>
 </html>

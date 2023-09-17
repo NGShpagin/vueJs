@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HW_2</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .product-box {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 5px;
+        }
+
+        .item {
+            border: 1px solid #000;
+            padding: 5px;
+            width: 30%;
+
+        }
+
+        .sort-button {
+            padding: 10px;
+            width: 150px;
+        }
+
+        .sort-button:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="product-box">
+        <div class="sort-box">
+            <button class="sort-button" @click="sortUpGoods" :disabled="isUpDisable">по возрастсанию</button>
+            <button class="sort-button" @click="sortDownGoods" :disabled="isDownDisable">по умолчанию</button>
+        </div>
+        <div v-for="product in products" :key="product.id" class="item">
+            <h3>{{ product.name }}</h3>
+            <p>Price: {{ product.price }} рублей</p>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    // Вы разрабатываете приложение для отображения и сортировки списка товаров.
+    // У вас есть массив объектов products, где каждый объект представляет товар с его названием и ценой.
+    // Вам необходимо отобразить список товаров и предоставить пользователю возможность сортировать товары по цене
+    // (по возрастанию и по убыванию).
+
+    var hw3 = new Vue({
+        el: '#app',
+        data() {
+            return {
+                products: [
+                    {id: 1, name: 'Bread', price: 123},
+                    {id: 2, name: 'Milk', price: 512},
+                    {id: 3, name: 'Water', price: 732},
+                    {id: 4, name: 'Wine', price: 234},
+                    {id: 5, name: 'Sugar', price: 532},
+                ],
+                isUpDisable: false,
+                isDownDisable: false,
+            }
+        },
+        methods: {
+            compareUp(a, b) {
+                return a.price - b.price;
+            },
+            compareDown(a, b) {
+                return b.price - a.price;
+            },
+            sortUpGoods() {
+                this.isUpDisable = true;
+                this.isDownDisable = false;
+                this.products.sort(this.compareUp);
+            },
+            sortDownGoods() {
+                this.isUpDisable = false;
+                this.isDownDisable = true;
+                this.products.sort(this.compareDown);
+            }
+        }
+    })
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Seminar 3</title>
+</head>
+<body>
+
+<div id="app">
+    <h1>Задача 1</h1>
+    <some-button></some-button>
+    <some-button></some-button>
+    <hr>
+    <!-- -->
+    <!-- -->
+    <!-- -->
+    <h1>Задача 2</h1>
+    <task-doing></task-doing>
+<!--    <template id="template-task">-->
+<!--        <div>-->
+<!--            <label for="">-->
+<!--                <input v-model="taskText" type="text">-->
+<!--                <button @click="addTask">Добавить</button>-->
+<!--            </label>-->
+<!--            <ul>-->
+<!--                <li v-for="task in taskList" :key="task.id">-->
+<!--                    {{ task }}-->
+<!--                    <button @click="">Удалить</button>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </template>-->
+    <hr>
+    <!-- -->
+    <!-- -->
+    <!-- -->
+    <h1>Задача 3</h1>
+    <task3></task3>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<!--<script src="seminar_3.js"></script>-->
+<script>
+
+    Vue.component('some-button', {
+            template: `
+              <div>
+                <button @click="minus">-</button>
+                <span>{{ counter }}</span>
+                <button @click="plus">+</button>
+              </div>`,
+            data() {
+                return {
+                    counter: 0,
+                }
+            },
+            methods: {
+                plus() {
+                    this.counter++;
+                },
+                minus() {
+                    this.counter--;
+                }
+            }
+        }
+    )
+
+    // Задача 2
+    // Создайте компонент списка дел, в котором можно добавлять и удалять элементы.
+    // Каждый элемент списка должен иметь кнопку удаления, при нажатии на которую элемент списка будет удаляться.
+
+
+    Vue.component('task-doing', {
+        template: `
+            <div>
+              <label>
+                <input v-model="taskText" type="text">
+                <button @click="addTask">Добавить</button>
+              </label>
+              <ul>
+                <li v-for="task in taskList" :key="task.id">
+                  {{ task.name }}
+                  <button @click="deleteTask(task.id)">Удалить</button>
+                </li>
+              </ul>
+            </div>
+        `,
+        data() {
+            return {
+                taskText: '',
+                taskList: []
+            }
+        },
+        methods: {
+            addTask() {
+                const newTask = {
+                    id: Date.now(),
+                    name: this.taskText,
+                }
+                this.taskList.push(newTask);
+                this.taskText = '';
+            },
+            deleteTask(delItemId) {
+                this.taskList = this.taskList.filter(task => task.id !== delItemId)
+            }
+        }
+    })
+
+    // Задача 3
+    // Создайте компонент списка, который отображает массив элементов. Добавьте текстовое поле для фильтрации списка.
+    // При вводе текста в поле, список должен автоматически обновляться, отображая только элементы, содержащие введенный текст.
+
+    Vue.component('task3', {
+        template: `
+            <div>
+              <label>
+                <input v-model="filterText" type="text" placeholder="Фильтр">
+              </label>
+              <ul>
+                <li v-for="good in filterGoods" :key="good.id">
+                  {{ good.name }}
+                </li>
+              </ul>
+            </div>
+        `,
+        data() {
+            return {
+                filterText: '',
+                goodsList: [
+                    {id: 1, name: 'Water'},
+                    {id: 1, name: 'Bread'},
+                    {id: 1, name: 'Milk'},
+                    {id: 1, name: 'Beef'}
+                ]
+            }
+        },
+        computed: {
+            filterGoods() {
+                return this.goodsList.filter(good => good.name.toLowerCase().includes(this.filterText.toLowerCase()))
+            }
+        }
+    })
+
+    new Vue({
+        el: '#app'
+    })
+
+</script>
+</body>
+</html>
